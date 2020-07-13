@@ -9,6 +9,9 @@ import java.awt.event.WindowEvent;
 public class TankFrame extends Frame {
     // 主坦克
     Tank myTank = new Tank(200, 200, Dir.DOWN);
+    // 主坦克子弹
+    Bullet b = new Bullet(300, 300, Dir.DOWN);
+
 
     public TankFrame() {
         // 设置窗口大小
@@ -41,7 +44,7 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         myTank.paint(g);
-
+        b.paint(g);
     }
 
     // 键盘监听事件处理实例类
