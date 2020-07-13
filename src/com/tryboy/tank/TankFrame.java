@@ -7,8 +7,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame {
-
-
     // 主坦克
     Tank myTank = new Tank(200, 200, Dir.DOWN);
 
@@ -105,11 +103,16 @@ public class TankFrame extends Frame {
             setMainTankDir();
         }
 
+        // 设置坦克方向
         private void setMainTankDir() {
+            if(!bL && !bU && !bR && !bD) myTank.setMoving(false);
+            else
+            myTank.setMoving(true);
             if(bL) myTank.setDir(Dir.LEFT);
             if(bU) myTank.setDir(Dir.Up);
             if(bR) myTank.setDir(Dir.RIGHT);
             if(bD) myTank.setDir(Dir.DOWN);
+
         }
     }
 }
