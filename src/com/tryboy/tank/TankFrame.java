@@ -8,17 +8,9 @@ import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame {
 
-    //坦克初始大小
-    final static int w = 50, h = 50;
-    // 初始位置
-    int x = 100, y = 100;
 
-    // 初始行进方向
-    Dir dir = Dir.DOWN;
-
-    // 初始行进速度
-    final static int SPEED = 10;
-
+    // 主坦克
+    Tank myTank = new Tank(200, 200, Dir.DOWN);
 
     public TankFrame() {
         // 设置窗口大小
@@ -50,25 +42,8 @@ public class TankFrame extends Frame {
     // 窗口绘制（包括创建，更改）时调用
     @Override
     public void paint(Graphics g) {
-        // 填充矩形
-        g.fillRect(x, y, w, h);
+        myTank.paint(g);
 
-        switch (dir) {
-            case LEFT:
-                x -= SPEED;
-                break;
-            case Up:
-                y -= SPEED;
-                break;
-            case RIGHT:
-                x += SPEED;
-                break;
-            case DOWN:
-                y += SPEED;
-                break;
-            default:
-                break;
-        }
     }
 
     // 键盘监听事件处理实例类
@@ -131,10 +106,10 @@ public class TankFrame extends Frame {
         }
 
         private void setMainTankDir() {
-            if(bL) dir = Dir.LEFT;
-            if(bU) dir = Dir.Up;
-            if(bR) dir = Dir.RIGHT;
-            if(bD) dir = Dir.DOWN;
+            if(bL) myTank.setDir(Dir.LEFT);
+            if(bU) myTank.setDir(Dir.Up);
+            if(bR) myTank.setDir(Dir.RIGHT);
+            if(bD) myTank.setDir(Dir.DOWN);
         }
     }
 }
