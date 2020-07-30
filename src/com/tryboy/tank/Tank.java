@@ -14,11 +14,15 @@ public class Tank {
     // 坦克移动状态
     private boolean moving = false;
 
+    // 坦克架子
+    private TankFrame tf = null;
+
     // 坦克构造初始化
-    public Tank(int x, int y, Dir dir) {
+    public Tank(int x, int y, Dir dir, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tf = tf;
     }
 
     public void setDir(Dir dir) {
@@ -35,6 +39,9 @@ public class Tank {
 
     // 坦克绘制
     public void paint(Graphics g) {
+        // 坦克颜色
+        Color c = g.getColor();
+        g.setColor(Color.YELLOW);
         // 填充矩形
         g.fillRect(x, y, w, h);
 
@@ -60,5 +67,9 @@ public class Tank {
             default:
                 break;
         }
+    }
+
+    public void fire() {
+        tf.b = new Bullet(this.x, this.y, this.dir);
     }
 }
