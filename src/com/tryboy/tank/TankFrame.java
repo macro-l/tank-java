@@ -5,12 +5,16 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.List;
+import java.util.ArrayList;
 
 public class TankFrame extends Frame {
     // 主坦克
     Tank myTank = new Tank(200, 200, Dir.DOWN, this);
-    // 主坦克子弹
-    Bullet b = new Bullet(300, 300, Dir.DOWN);
+    // 主坦克子弹容器
+    List<Bullet> bullets = new ArrayList<>();
+//    // 主坦克子弹
+//    Bullet b = new Bullet(300, 300, Dir.DOWN);
 
     // 窗口长宽
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
@@ -61,8 +65,22 @@ public class TankFrame extends Frame {
     // 窗口绘制（包括创建，更改）时调用
     @Override
     public void paint(Graphics g) {
+        Color c = g.getColor();
+        g.setColor(Color.WHITE);
+        g.drawString("子弹数量:"+bullets.size(),10,60);
+        g.setColor(c);
+
         myTank.paint(g);
-        b.paint(g);
+
+        // for-each 无法删除容器 - 锁
+//        for (Bullet b : bullets) {
+//            b.paint(g);
+//        }
+
+        // 普通循环可以删除容器
+        for (int i=0; i<bullets.size(); i++) {
+            bullets.get(i).paint(g);
+        }
     }
 
     // 键盘监听事件处理实例类
