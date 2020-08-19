@@ -40,12 +40,34 @@ public class Tank {
     // 坦克绘制
     public void paint(Graphics g) {
         // 坦克颜色
-        Color c = g.getColor();
-        g.setColor(Color.YELLOW);
-        // 填充矩形
-        g.fillRect(x, y, w, h);
+//        Color c = g.getColor();
+//        g.setColor(Color.YELLOW);
+//        // 填充矩形
+//        g.fillRect(x, y, w, h);
+
+        switch (dir){
+            case LEFT:
+                g.drawImage(ResourceMgr.tankL, x, y, null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourceMgr.tankR, x, y, null);
+                break;
+            case UP:
+                g.drawImage(ResourceMgr.tankU, x, y, null);
+                break;
+            case DOWN:
+                g.drawImage(ResourceMgr.tankD, x, y, null);
+                break;
+
+        }
+
 
         move();
+    }
+
+
+    public void ttt (int a, int b) {
+        System.out.println("123");
     }
 
     private void move() {
@@ -55,7 +77,7 @@ public class Tank {
             case LEFT:
                 x -= SPEED;
                 break;
-            case Up:
+            case UP:
                 y -= SPEED;
                 break;
             case RIGHT:

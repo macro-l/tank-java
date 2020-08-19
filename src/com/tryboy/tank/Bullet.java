@@ -39,7 +39,7 @@ public class Bullet {
             case LEFT:
                 x -= SPEED;
                 break;
-            case Up:
+            case UP:
                 y -= SPEED;
                 break;
             case RIGHT:
