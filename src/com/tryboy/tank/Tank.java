@@ -1,6 +1,7 @@
 package com.tryboy.tank;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Tank {
     // 坦克初始化位置
@@ -12,10 +13,13 @@ public class Tank {
     // 坦克初始大小
     final static int w = ResourceMgr.tankD.getWidth(), h = ResourceMgr.tankD.getHeight();
     // 坦克移动状态
-    private boolean moving = false;
+    private boolean moving = true;
     // 坦克存活
     private boolean living = true;
-
+    // 随机数
+    private Random random = new Random();
+    // 阵营
+    private Group group = Group.BAD;
 
     public int getX() {
         return x;
@@ -33,14 +37,23 @@ public class Tank {
         this.y = y;
     }
 
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
     // 坦克架子
     private TankFrame tf = null;
 
     // 坦克构造初始化
-    public Tank(int x, int y, Dir dir, TankFrame tf) {
+    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tf = tf;
     }
 
@@ -108,12 +121,14 @@ public class Tank {
             default:
                 break;
         }
+
+        if (random.nextInt(10)>5) this.fire();
     }
 
     public void fire() {
         int bX = this.x + Tank.w/2 - Bullet.WIDTH/2;
         int bY = this.y + Tank.h/2 - Bullet.HEIGHT/6;
-        tf.bullets.add(new Bullet(bX, bY, this.dir, this.tf));
+        tf.bullets.add(new Bullet(bX, bY, this.dir, this.group, this.tf));
     }
 
     public void die() {

@@ -4,6 +4,7 @@ import java.awt.*;
 
 public class Bullet {
     private static final int SPEED = 10;
+
     // 子弹的宽高
     public static int WIDTH=ResourceMgr.bulletD.getWidth(), HEIGHT = ResourceMgr.bulletD.getHeight();
     private int x,y;
@@ -13,10 +14,22 @@ public class Bullet {
 
     private boolean live = true;
 
-    public Bullet(int x, int y, Dir dir, TankFrame tf) {
+    // 子弹阵营
+    private Group group = Group.BAD;
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tf = tf;
     }
 
@@ -75,8 +88,15 @@ public class Bullet {
     }
 
     public void collideWith(Tank tank) {
+        if(this.group == tank.getGroup()) return;
+
+        // 多个rect记录
         Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
         Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), tank.w, tank.h);
+
+
+        // 单个rect记录
+
         if (rect1.intersects(rect2)) {
             tank.die();
             this.die();

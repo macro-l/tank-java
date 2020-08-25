@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class TankFrame extends Frame {
     // 主坦克
-    Tank myTank = new Tank(200, 400, Dir.DOWN, this);
+    Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
     // 主坦克子弹容器
     List<Bullet> bullets = new ArrayList<>();
 //    // 主坦克子弹
