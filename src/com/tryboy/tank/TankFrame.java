@@ -10,11 +10,14 @@ import java.util.ArrayList;
 
 public class TankFrame extends Frame {
     // 主坦克
-    Tank myTank = new Tank(200, 200, Dir.DOWN, this);
+    Tank myTank = new Tank(200, 400, Dir.DOWN, this);
     // 主坦克子弹容器
     List<Bullet> bullets = new ArrayList<>();
 //    // 主坦克子弹
 //    Bullet b = new Bullet(300, 300, Dir.DOWN);
+
+    // 敌方坦克
+    List<Tank> tanks = new ArrayList<>();
 
     // 窗口长宽
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
@@ -67,7 +70,8 @@ public class TankFrame extends Frame {
     public void paint(Graphics g) {
         Color c = g.getColor();
         g.setColor(Color.WHITE);
-        g.drawString("子弹数量:"+bullets.size(),10,60);
+        g.drawString("子弹的数量:"+bullets.size(),10,60);
+        g.drawString("敌人的数量:"+tanks.size(),10,80);
         g.setColor(c);
 
         myTank.paint(g);
@@ -77,9 +81,21 @@ public class TankFrame extends Frame {
 //            b.paint(g);
 //        }
 
+        // 子弹
         // 普通循环可以删除容器
         for (int i=0; i<bullets.size(); i++) {
             bullets.get(i).paint(g);
+        }
+
+        // 敌方绘制坦克
+        for (int i=0; i<tanks.size(); i++) {
+            tanks.get(i).paint(g);
+        }
+
+        for(int i=0; i<bullets.size(); i++) {
+            for (int j=0; j<tanks.size(); j++) {
+                bullets.get(i).collideWith(tanks.get(j));
+            }
         }
     }
 

@@ -10,9 +10,28 @@ public class Tank {
     // 坦克初始化速度
     private static final int SPEED = 5;
     // 坦克初始大小
-    final static int w = 50, h = 50;
+    final static int w = ResourceMgr.tankD.getWidth(), h = ResourceMgr.tankD.getHeight();
     // 坦克移动状态
     private boolean moving = false;
+    // 坦克存活
+    private boolean living = true;
+
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
 
     // 坦克架子
     private TankFrame tf = null;
@@ -45,6 +64,10 @@ public class Tank {
 //        // 填充矩形
 //        g.fillRect(x, y, w, h);
 
+        if(!living) {
+            tf.tanks.remove(this);
+        }
+
         switch (dir){
             case LEFT:
                 g.drawImage(ResourceMgr.tankL, x, y, null);
@@ -65,10 +88,6 @@ public class Tank {
         move();
     }
 
-
-    public void ttt (int a, int b) {
-        System.out.println("123");
-    }
 
     private void move() {
         if(!moving) return;
@@ -92,6 +111,12 @@ public class Tank {
     }
 
     public void fire() {
-        tf.bullets.add(new Bullet(this.x, this.y, this.dir, this.tf));
+        int bX = this.x + Tank.w/2 - Bullet.WIDTH/2;
+        int bY = this.y + Tank.h/2 - Bullet.HEIGHT/6;
+        tf.bullets.add(new Bullet(bX, bY, this.dir, this.tf));
+    }
+
+    public void die() {
+        this.living = false;
     }
 }

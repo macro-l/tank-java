@@ -8,13 +8,21 @@ import java.io.IOException;
 
 public class ResourceMgr {
     public static BufferedImage tankL, tankR, tankU, tankD;
+    public static BufferedImage bulletL, bulletR, bulletU, bulletD;
 
     static {
         try {
-            tankL = ImageIO.read(RecordedClass.class.getClassLoader().getResourceAsStream("img/tankL.git"));
-            tankR = ImageIO.read(RecordedClass.class.getClassLoader().getResourceAsStream("img/tankR.git"));
-            tankU = ImageIO.read(RecordedClass.class.getClassLoader().getResourceAsStream("img/tankU.git"));
-            tankD = ImageIO.read(RecordedClass.class.getClassLoader().getResourceAsStream("img/tankD.git"));
+            // 坦克皮肤
+            tankL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("img/tankL.gif"));
+            tankR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("img/tankR.gif"));
+            tankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("img/tankU.gif"));
+            tankD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("img/tankD.gif"));
+
+            // 子弹皮肤
+            bulletL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("img/bulletL.gif"));
+            bulletR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("img/bulletR.gif"));
+            bulletU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("img/bulletU.gif"));
+            bulletD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("img/bulletD.gif"));
         } catch (IOException e) {
             e.printStackTrace();
         }
