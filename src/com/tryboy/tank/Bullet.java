@@ -96,7 +96,6 @@ public class Bullet {
 
 
         // 单个rect记录
-
         if (rect1.intersects(rect2)) {
             tank.die();
             this.die();

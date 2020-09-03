@@ -15,9 +15,11 @@ public class TankFrame extends Frame {
     List<Bullet> bullets = new ArrayList<>();
 //    // 主坦克子弹
 //    Bullet b = new Bullet(300, 300, Dir.DOWN);
-
     // 敌方坦克
     List<Tank> tanks = new ArrayList<>();
+    // 爆炸
+    Explode e = new Explode(100, 100 , this);
+
 
     // 窗口长宽
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
@@ -97,6 +99,7 @@ public class TankFrame extends Frame {
                 bullets.get(i).collideWith(tanks.get(j));
             }
         }
+        e.paint(g);
     }
 
     // 键盘监听事件处理实例类
