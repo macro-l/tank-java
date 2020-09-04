@@ -18,6 +18,7 @@ public class TankFrame extends Frame {
     // 敌方坦克
     List<Tank> tanks = new ArrayList<>();
     // 爆炸
+//    List<Explode> explodes = new ArrayList<>();
     Explode e = new Explode(100, 100 , this);
 
 
